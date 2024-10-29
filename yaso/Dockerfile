@@ -4,9 +4,11 @@ WORKDIR /usr/app/
 
 COPY . .
 
-RUN gradle buildFROM openjdk:21-jdk-slim
+RUN gradle build
 
-COPY --from=BUILD /usr/app .EXPOSE 8080 ENTRYPOINT
+FROM openjdk:21-jdk-slim
+
+COPY --from=BUILD /usr/app .
 
 EXPOSE 8080
 
